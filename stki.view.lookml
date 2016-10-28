@@ -1,5 +1,5 @@
 - view: stki
-  sql_table_name: public.stki
+  sql_table_name: public.stki_enhanced
   label: 'STKI'
   fields:
 
@@ -73,6 +73,32 @@
   - dimension: originalinvoiceid
     type: string
     sql: ${TABLE}.originalinvoiceid
+
+  - dimension: unbilledreceivableid
+    type: string
+    sql: ${TABLE}.unbilledreceivableid
+    
+  - dimension: invoicematuritydate
+    type: time
+    timeframes: [date, week, month]
+    sql: cast(${TABLE}.invoicematuritydate as date)
+    
+  - dimension: paymentterms
+    type: number
+    sql: ${TABLE}.paymentterms
+
+  - dimension: daysoverdue
+    label: 'Days Overdue'
+    type: number
+    sql: datediff(day, ${invoicematuritydate_date}, getdate())
+
+  - dimension: overdue
+    type: yesno
+    sql: ${daysoverdue} > 0
+
+  - measure: avg_daysoverdue
+    type: average
+    sql: ${daysoverdue}
 
   - measure: itemclosingbalance
     label: 'Item Closing Balance'

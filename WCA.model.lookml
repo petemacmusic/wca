@@ -78,3 +78,11 @@
       type: inner
       sql_on: ${stki.collectiontimetableid} = ${audit.collectiontimetableid} AND ${eventtype.eventtypeid} = ${audit.eventtypeid}
       relationship: many_to_one
+    - join: filetype
+      type: inner
+      sql_on: ${stki.filetypeid} = ${filetype.filetypeid}
+      relationship: many_to_one
+    - join: newb
+      type: inner
+      sql_on: ${stki.itemidentificationnumber} = ${newb.billedreceivableid}
+      relationship: many_to_one
