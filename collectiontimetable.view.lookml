@@ -9,53 +9,65 @@
     sql: ${TABLE}.collectiontimetableid
     primary_key: true
 
-  - dimension: advancecalculationdate
-    type: string
-    sql: ${TABLE}.advancecalculationdate
-
-  - dimension: advancepaymentdate
-    type: string
-    sql: ${TABLE}.advancepaymentdate
-
-  - dimension: advancereportdate
-    type: string
-    sql: ${TABLE}.advancereportdate
-
-  - dimension: billcutoffdate
-    type: string
-    sql: ${TABLE}.billcutoffdate
+  - dimension: consumptionperiodstartdate
+    label: 'Consumption Period Start Date'
+    type: date_date
+    sql: cast(${TABLE}.consumptionperiodstartdate as date)
 
   - dimension: consumptionperiodenddate
-    type: string
-    sql: ${TABLE}.consumptionperiodenddate
-
-  - dimension: consumptionperiodstartdate
-    type: string
-    sql: ${TABLE}.consumptionperiodstartdate
-
-  - dimension: estimatecorrectionfactor
-    type: number
-    sql: ${TABLE}.estimatecorrectionfactor
+    label: 'Consumption Period End Date'
+    type: date_date
+    sql: cast(${TABLE}.consumptionperiodenddate as date)
 
   - dimension: perimeterdate
-    type: string
-    sql: ${TABLE}.perimeterdate
-
-  - dimension: reconciliationcalculationdate
-    type: string
-    sql: ${TABLE}.reconciliationcalculationdate
-
-  - dimension: reconciliationpaymentdate
-    type: string
-    sql: ${TABLE}.reconciliationpaymentdate
-
-  - dimension: reconciliationreportingdate
-    type: string
-    sql: ${TABLE}.reconciliationreportingdate
+    label: 'Peimeter date'
+    type: date_date
+    sql: cast(${TABLE}.perimeterdate as date)
 
   - dimension: unbilledestimationinitialreviewdate
-    type: string
-    sql: ${TABLE}.unbilledestimationinitialreviewdate
+    label: 'Unbilled Estimation Initial Review Date'
+    type: date_date
+    sql: cast(${TABLE}.unbilledestimationinitialreviewdate as date)
+
+  - dimension: advancereportdate
+    label: 'Advance Report Date'
+    type: date_date
+    sql: cast(${TABLE}.advancereportdate as date)
+    
+  - dimension: advancecalculationdate
+    label: 'Advance Calculation Date'
+    type: date_date
+    sql: cast(${TABLE}.advancecalculationdate as date)
+
+  - dimension: advancepaymentdate
+    label: 'Advance Payment Date'
+    type: date_date
+    sql: cast(${TABLE}.advancepaymentdate as date)
+
+  - dimension: billcutoffdate
+    label: 'Bill Cutoff Date'
+    type: date_date
+    sql: cast(${TABLE}.billcutoffdate as date)
+
+  - dimension: reconciliationreportingdate
+    label: 'Reconciliation Reporting Date'
+    type: date_date
+    sql: cast(${TABLE}.reconciliationreportingdate as date)
+
+  - dimension: reconciliationcalculationdate
+    label: 'Reconciliation Calculation Date'
+    type: date_date
+    sql: cast(${TABLE}.reconciliationcalculationdate as date)
+
+  - dimension: reconciliationpaymentdate
+    label: 'Reconciliation Payment Date'
+    type: date_date
+    sql: cast(${TABLE}.reconciliationpaymentdate as date)
+
+  - dimension: estimatecorrectionfactor
+    label: 'Estimate Correction Factor'
+    type: number
+    sql: ${TABLE}.estimatecorrectionfactor
 
   - measure: count
     type: count

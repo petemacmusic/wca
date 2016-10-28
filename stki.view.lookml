@@ -1,11 +1,12 @@
 - view: stki
   sql_table_name: public.stki
+  label: 'STKI'
   fields:
 
   - dimension: collectiontimetableid
     type: number
     value_format_name: id
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.collectiontimetableid
 
   - dimension: debtorexternalidentificationcode
@@ -13,6 +14,7 @@
     sql: ${TABLE}.debtorexternalidentificationcode
 
   - dimension: debtorinternalidentificationcode
+    label: 'Crm Ext Id'
     type: string
     sql: ${TABLE}.debtorinternalidentificationcode
 
@@ -47,33 +49,42 @@
     sql: ${TABLE}.invoicetoberepurchased
 
   - dimension: issuedate
-    type: string
-    sql: ${TABLE}.issuedate
-
-  - dimension: itemclosingbalance
-    type: number
-    sql: ${TABLE}.itemclosingbalance
+    label: 'Issue Date'
+    type: time
+    timeframes: [date, week, month]
+    sql: cast(${TABLE}.issuedate as date)
 
   - dimension: itemidentificationnumber
     type: string
     sql: ${TABLE}.itemidentificationnumber
 
-  - dimension: itemnominalvalue
-    type: number
-    sql: ${TABLE}.itemnominalvalue
-
   - dimension: itemtype
+    label: 'Item Type'
     type: string
     sql: ${TABLE}.itemtype
 
   - dimension: monthlycutoffdate
-    type: string
-    sql: ${TABLE}.monthlycutoffdate
+    label: 'Monthly Cutoff Date'
+    type: time
+    timeframes: [date, week, month]
+    sql: cast(${TABLE}.monthlycutoffdate as date)
 
   - dimension: originalinvoiceid
     type: string
     sql: ${TABLE}.originalinvoiceid
 
+  - measure: itemclosingbalance
+    label: 'Item Closing Balance'
+    type: sum
+    value_format_name: gbp
+    sql: ${TABLE}.itemclosingbalance
+
+  - measure: itemnominalvalue
+    label: 'Nominal Value'
+    type: sum
+    value_format_name: gbp
+    sql: ${TABLE}.itemnominalvalue
+    
   - measure: count
     type: count
     drill_fields: [collectiontimetable.collectiontimetableid]
