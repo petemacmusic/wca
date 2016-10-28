@@ -66,3 +66,15 @@
       type: inner
       sql_on: ${stki.collectiontimetableid} = ${collectiontimetable.collectiontimetableid}
       relationship: many_to_one
+    - join: eventtype
+      type: inner
+      sql_on: ${stki.filetypeid} = ${eventtype.filetypeid}
+      relationship: many_to_one
+    - join: eventcategory
+      type: inner
+      sql_on: ${eventtype.eventcategoryid} = ${eventcategory.eventcategoryid}
+      relationship: many_to_one
+    - join: audit 
+      type: inner
+      sql_on: ${stki.collectiontimetableid} = ${audit.collectiontimetableid} AND ${eventtype.eventtypeid} = ${audit.eventtypeid}
+      relationship: many_to_one

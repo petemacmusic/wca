@@ -6,7 +6,7 @@
   - dimension: collectiontimetableid
     type: number
     value_format_name: id
-    hidden: true
+    # hidden: true
     sql: ${TABLE}.collectiontimetableid
 
   - dimension: debtorexternalidentificationcode
@@ -57,6 +57,7 @@
   - dimension: itemidentificationnumber
     type: string
     sql: ${TABLE}.itemidentificationnumber
+    drill_fields: [itemidentificationnumber, collectiontimetableid, itemnominalvalue, itemclosingbalance]
 
   - dimension: itemtype
     label: 'Item Type'
@@ -78,14 +79,16 @@
     type: sum
     value_format_name: gbp
     sql: ${TABLE}.itemclosingbalance
+    drill_fields: [collectiontimetableid, debtorinternalidentificationcode, itemidentificationnumber, invoicestatus, issuedate, itemtype, itemnominalvalue, itemclosingbalance]
 
   - measure: itemnominalvalue
     label: 'Nominal Value'
     type: sum
     value_format_name: gbp
     sql: ${TABLE}.itemnominalvalue
+    drill_fields: [collectiontimetableid, debtorinternalidentificationcode, itemidentificationnumber, invoicestatus, issuedate, itemtype, itemnominalvalue, itemclosingbalance]
     
   - measure: count
     type: count
-    drill_fields: [collectiontimetable.collectiontimetableid]
+    drill_fields: [itemidentificationnumber, itemnominalvalue, itemclosingbalance]
 
