@@ -1,6 +1,6 @@
 - view: candidateaccounthistory
   label: 'Candidate Account History'
-  sql_table_name: public.candidateaccounthistory
+  sql_table_name: public.candidate_account_history_2
   fields:
 
   - dimension: accountdebtorlimit
@@ -60,7 +60,7 @@
 
   - dimension: crmextid
     type: string
-    sql: ${TABLE}.crmextid
+    sql: ${TABLE}.cah_crmextid
 
   - dimension: customername
     type: string
@@ -78,7 +78,35 @@
     type: string
     sql: ${TABLE}.publicdebtor
 
+  - dimension: iandchhearliestcsd
+    label: "I&C HH Earliest CSD"
+    type: time
+    timeframes: [date, month]
+    sql: cast(${TABLE}.iandchheaslierstcsd as date)
+
+#   - dimension: I&CHHEarliestCsdMonth
+#     label: "I&C HH Earliest CSD Month"
+#     type: date_month
+#     sql: cast(${TABLE}.iandchheaslierstcsd as date)
+
+  - dimension: iandchhlatesced
+    label: "I&C HH Latest CED"
+    type: date_date
+    sql: cast(${TABLE}.iandchhlatesced as date)
+    
+  - measure: iandchhlastbillvalue
+    label: "I&C HH Last Bill Value"
+    type: sum
+    value_format_name: gbp
+    sql: ${TABLE}.iandchhlastbillvalue
+   
+  - measure: iandchhmpansnow
+    label: "I&C HH MPAN Count"
+    type: sum
+    sql: ${TABLE}.iandchhmpansnow
+
   - measure: count
+    label: "Count of Customers"
     type: count
     drill_fields: [customername, collectiontimetable.collectiontimetableid]
 

@@ -21,16 +21,12 @@
     sql: ${TABLE}.invoiceendingbalance
 
   - dimension: invoiceissuedate
-    type: string
+    type: date_date
     sql: ${TABLE}.invoiceissuedate
 
   - dimension: invoicematuritydate
-    type: string
+    type: date_date
     sql: ${TABLE}.invoicematuritydate
-
-  - dimension: invoicenominalamount
-    type: number
-    sql: ${TABLE}.invoicenominalamount
 
   - dimension: mpancore
     type: string
@@ -45,26 +41,19 @@
     value_format_name: id
     sql: ${TABLE}."naur.collectiontimetableid"
 
-  - dimension: naur_unbilledamount
-    type: number
-    sql: ${TABLE}."naur.unbilledamount"
-
   - dimension: naur_unbilledreceivableid
     type: string
     sql: ${TABLE}."naur.unbilledreceivableid"
 
   - dimension: neur_collectiontimetableid
     type: number
-    value_format_name: id
+    #value_format_name: id
     sql: ${TABLE}.neur_collectiontimetableid
 
   - dimension: neur_crmextid
+    label: "Crm Ext Id"
     type: string
     sql: ${TABLE}."neur.crmextid"
-
-  - dimension: neur_unbilledamount
-    type: number
-    sql: ${TABLE}."neur.unbilledamount"
 
   - dimension: neur_unbilledreceivableid
     type: string
@@ -92,7 +81,22 @@
     type: string
     sql: ${TABLE}.unbilledreceivableid
 
+  - measure: naur_unbilledamount
+    label: "NAUR Amount"
+    type: sum
+    sql: ${TABLE}."naur.unbilledamount"
+    
+  - measure: neur_unbilledamount
+    label: "NEUR Amount"
+    type: sum
+    sql: ${TABLE}."neur.unbilledamount"
+
+  - measure: invoicenominalamount
+    label: "Invoice Amount"
+    type: sum
+    sql: ${TABLE}.invoicenominalamount
+    
   - measure: count
     type: count
-    drill_fields: [exclusionreason.exclusionreasonid]
+    drill_fields: [neur_crmextid, neur_unbilledreceivableid, neur_unbilledamount]
 

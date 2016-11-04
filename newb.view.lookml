@@ -4,6 +4,7 @@
   fields:
 
   - dimension: billedreceivableid
+    label: "Billed Receivable Id"
     type: string
     sql: ${TABLE}.billedreceivableid
 
@@ -40,11 +41,13 @@
     sql: ${TABLE}.filetypeid
 
   - dimension_group: invoiceissuedate
+    label: "Issue Date"
     type: time
     timeframes: [date, week, month]
     sql: cast(${TABLE}.invoiceissuedate as date)
 
   - dimension_group: invoicematuritydate
+    label: "Due Date"
     type: time
     timeframes: [date, week, month]
     sql: cast(${TABLE}.invoicematuritydate as date)
@@ -55,27 +58,34 @@
     sql: cast(${TABLE}.monthlycutoffdate as date)
 
   - dimension: originalinvoiceid
+    label: "Original Invoice Id"
     type: string
     sql: ${TABLE}.originalinvoiceid
 
   - dimension: unbilledreceivableid
+    label: "Unbilled Receivable Id"
     type: string
     sql: ${TABLE}.unbilledreceivableid
     
   - dimension: payment_terms
+    label: "Payment Terms"
     type: number
     sql: DATEDIFF(day, ${invoiceissuedate_date}, ${invoicematuritydate_date})
 
   - measure: count
     type: count
-    drill_fields: [collectiontimetableid, originalinvoiceid]
+    drill_fields: [collectiontimetableid, originalinvoiceid, billedreceivableid, invoiceissuedate, invoicematuritydate, payment_terms, invoicenominalamount, invoiceendingbalance]
     
   - measure: invoicenominalamount
+    label: "Invoice Nominal Amount"
     type: sum
+    value_format_name: gbp
     sql: ${TABLE}.invoicenominalamount
 
   - measure: invoiceendingbalance
+    label: "Invoice Ending Balance"
     type: sum
+    value_format_name: gbp
     sql: ${TABLE}.invoiceendingbalance
 
 

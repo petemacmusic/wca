@@ -19,6 +19,11 @@
     type: date_date
     sql: cast(${TABLE}.consumptionperiodenddate as date)
 
+  - dimension: consumptionmonth
+    label: "Consumption Month"
+    type: date_month
+    sql: cast(${TABLE}.consumptionperiodstartdate as date)
+
   - dimension: perimeterdate
     label: 'Peimeter date'
     type: date_date

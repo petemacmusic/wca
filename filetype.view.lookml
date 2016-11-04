@@ -8,14 +8,17 @@
     sql: ${TABLE}.filetypeid
 
   - dimension: filepicturedate
+    label: "File Picture Date"
     type: string
     sql: ${TABLE}.filepicturedate
 
   - dimension: fileproductiondate
+    label: "File Production Date"
     type: string
     sql: ${TABLE}.fileproductiondate
 
   - dimension: filetypedescription
+    label: "File Type Description"
     type: string
     sql: ${TABLE}.filetypedescription
 

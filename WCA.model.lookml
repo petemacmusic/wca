@@ -54,11 +54,43 @@
       type: inner
       sql_on: ${newb.unbilledreceivableid} = ${neur.unbilledreceivableid}
       relationship: many_to_one
+    - join: filetype
+      type: inner
+      sql_on: ${newb.filetypeid} = ${filetype.filetypeid}
+      relationship: many_to_one
 #     - join: naur
 #       type: inner
 #       sql_on: ${newb.unbilledreceivableid} = ${naur.unbilledreceivableid}
 #       relationship: many_to_one
-      
+
+- explore: wca_billed_unbilled
+  label: "NEUR"
+  joins:
+    - join: collectiontimetable
+      type: inner
+      sql_on: = ${wca_billed_unbilled.neur_collectiontimetableid} = ${collectiontimetable.collectiontimetableid}
+      relationship: many_to_one
+
+- explore: candidateaccounthistory
+  label: "Candidate Account History"
+  joins: 
+    - join: collectiontimetable
+      type: inner
+      sql_on: ${candidateaccounthistory.collectiontimetableid} = ${collectiontimetable.collectiontimetableid}
+      relationship: many_to_one
+  
+- explore: perimetermpans
+  label: "Perimeter Mpans"
+  joins:
+    - join: collectiontimetable
+      type: inner
+      sql_on: ${perimetermpans.collectiontimetableid} = ${collectiontimetable.collectiontimetableid}
+      relationship: many_to_one
+    - join: candidateaccounthistory
+      type: inner
+      sql_on: ${perimetermpans.collectiontimetableid} = ${candidateaccounthistory.collectiontimetableid} AND ${perimetermpans.crmextid} = ${candidateaccounthistory.crmextid}
+      relationship: many_to_one
+  
 - explore: stki
   label: 'STKI'
   joins:
